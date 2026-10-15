@@ -1,0 +1,25 @@
+<div class="sb-auth-card sb-card--pad">
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-ink-900">Забыли пароль?</h1>
+    <p class="text-sm text-ink-500 mt-1.5">Введите email — отправим инструкции для восстановления</p>
+  </div>
+
+  <%= form_with model: resource, url: password_path(resource_name), local: true, html: { data: { turbo: false } }, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email, "Email", class: "sb-label" %>
+      <%= f.email_field :email,
+            autofocus: true,
+            autocomplete: "email",
+            placeholder: "you@example.com",
+            class: "sb-input",
+            value: params.dig(:user, :email) %>
+    </div>
+
+    <%= f.submit "Отправить инструкции", class: "sb-btn--primary sb-btn--lg w-full" %>
+  <% end %>
+
+  <div class="mt-6 pt-5 border-t border-line text-center text-sm text-ink-500">
+    Вспомнили пароль?
+    <%= link_to "Войти", new_user_session_path, class: "font-semibold text-terra-700 hover:underline" %>
+  </div>
+</div>

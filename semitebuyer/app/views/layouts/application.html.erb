@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title><%= content_for(:title) || "Semitebuyer" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <!-- Fonts (Manrope via Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen flex flex-col">
+    <%= render "shared/navbar" %>
+
+    <% flash.each do |type, message| %>
+      <% alert_class = case type.to_s
+        when "notice" then "sb-alert--success"
+        when "alert"  then "sb-alert--warning"
+        when "info"   then "sb-alert--info"
+        when "error", "danger" then "sb-alert--danger"
+        else "sb-alert--info"
+        end %>
+      <div class="container mx-auto mt-4 px-5" data-turbo-cache="false">
+        <div class="<%= alert_class %>" role="alert">
+          <span class="mt-0.5 shrink-0">
+            <% if type.to_s == "notice" %>&#10003;<% elsif type.to_s == "alert" %>&#9888;<% else %>&#8505;<% end %>
+          </span>
+          <div class="text-sm leading-relaxed"><%= message %></div>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="container mx-auto flex-1 px-5 py-8 w-full max-w-7xl">
+      <%= yield %>
+    </main>
+
+    <%= render "shared/footer" %>
+  </body>
+</html>

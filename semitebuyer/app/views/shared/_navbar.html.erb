@@ -1,0 +1,60 @@
+<nav class="bg-white border-b border-line sticky top-0 z-30">
+  <div class="container mx-auto max-w-7xl px-5">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <%= link_to root_path, class: "flex items-center gap-2 font-display font-bold text-xl text-terra-700" do %>
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-terra-500 text-white text-lg font-bold">
+          S
+        </span>
+        <span>semite<span class="text-terra-500">buyer</span></span>
+      <% end %>
+
+      <!-- Primary nav -->
+      <div class="hidden md:flex items-center gap-1">
+        <%= link_to "Каталог", "#", class: "sb-nav-link" %>
+        <%= link_to "Мои закупки", "#", class: "sb-nav-link" %>
+        <%= link_to "Как это работает", "#", class: "sb-nav-link" %>
+      </div>
+
+      <!-- User menu / Login -->
+      <div class="flex items-center gap-3">
+        <% if user_signed_in? %>
+          <div class="relative" data-controller="dropdown">
+            <button type="button"
+                    class="flex items-center gap-2 rounded-full p-0.5 pr-3 hover:bg-cream-100 transition-colors"
+                    data-action="click->dropdown#toggle">
+              <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-terra-100 text-terra-700 font-semibold text-sm">
+                <%= current_user.initials %>
+              </span>
+              <span class="hidden sm:block text-sm font-medium text-ink-900"><%= current_user.first_name %></span>
+              <svg class="h-4 w-4 text-ink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div data-dropdown-target="menu"
+                 class="hidden absolute right-0 mt-2 w-56 sb-card sb-card--pad p-2">
+              <div class="px-3 py-2 mb-1 border-b border-line">
+                <div class="text-sm font-semibold text-ink-900 truncate"><%= current_user.display_name %></div>
+                <div class="text-xs text-ink-500 truncate"><%= current_user.email %></div>
+                <div class="mt-1">
+                  <span class="sb-badge <%= current_user.organizer? ? 'sb-badge--terra' : 'sb-badge--neutral' %>">
+                    <%= current_user.organizer? ? "Организатор" : "Участник" %>
+                  </span>
+                </div>
+              </div>
+              <%= link_to "Личный кабинет", dashboard_path, class: "sb-nav-link block" %>
+              <%= link_to "Настройки профиля", edit_user_registration_path, class: "sb-nav-link block" %>
+              <div class="my-1 border-t border-line"></div>
+              <%= button_to "Выйти", destroy_user_session_path, method: :delete,
+                  class: "sb-nav-link block text-left w-full text-danger-500 hover:bg-danger-50",
+                  form: { data: { turbo_confirm: "Выйти из аккаунта?" } } %>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to "Войти", new_user_session_path, class: "sb-btn--ghost sb-btn--sm" %>
+          <%= link_to "Регистрация", new_user_registration_path, class: "sb-btn--primary sb-btn--sm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

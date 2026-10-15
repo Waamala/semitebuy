@@ -1,0 +1,75 @@
+<div class="sb-auth-card sb-card--pad">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-ink-900">Личные данные</h1>
+    <p class="text-sm text-ink-500 mt-1.5">Обновите профиль и контактную информацию</p>
+  </div>
+
+  <%= form_with model: resource, url: registration_path(resource_name), local: true, method: :patch, html: { data: { turbo: false } }, class: "space-y-4" do |f| %>
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <%= f.label :first_name, "Имя", class: "sb-label" %>
+        <%= f.text_field :first_name, autocomplete: "given-name", class: "sb-input" %>
+      </div>
+      <div>
+        <%= f.label :last_name, "Фамилия", class: "sb-label" %>
+        <%= f.text_field :last_name, autocomplete: "family-name", class: "sb-input" %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :email, "Email", class: "sb-label" %>
+      <%= f.email_field :email, autocomplete: "email", class: "sb-input" %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="sb-hint">Ожидает подтверждения: <%= resource.unconfirmed_email %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :phone, "Телефон", class: "sb-label" %>
+      <%= f.telephone_field :phone, autocomplete: "tel", class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :city, "Город", class: "sb-label" %>
+      <%= f.text_field :city, autocomplete: "address-level2", class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :about, "О себе", class: "sb-label" %>
+      <%= f.text_area :about, rows: 3, placeholder: "Несколько слов о себе", class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :password, "Новый пароль (оставьте пустым, чтобы не менять)", class: "sb-label" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "sb-input" %>
+      <% if @minimum_password_length %>
+        <div class="sb-hint">минимум <%= @minimum_password_length %> символов</div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Повторите новый пароль", class: "sb-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :current_password, "Текущий пароль (обязательно для сохранения)", class: "sb-label" %>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "sb-input" %>
+    </div>
+
+    <div class="pt-2 flex flex-wrap gap-3">
+      <%= f.submit "Сохранить", class: "sb-btn--primary sb-btn--lg" %>
+      <%= link_to "Назад", :back, class: "sb-btn--ghost sb-btn--lg" %>
+    </div>
+  <% end %>
+
+  <div class="mt-6 pt-5 border-t border-line">
+    <h3 class="text-sm font-semibold text-ink-900 mb-2">Удаление аккаунта</h3>
+    <p class="text-xs text-ink-500 mb-3">Это действие необратимо. Все ваши данные будут потеряны.</p>
+    <%= button_to "Удалить мой аккаунт",
+          registration_path(resource_name),
+          method: :delete,
+          class: "sb-btn--danger sb-btn--sm",
+          form: { data: { turbo_confirm: "Вы уверены? Это действие необратимо." } } %>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title><%= content_for(:title) || "Semitebuyer" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <!-- Fonts (Manrope via Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-cream-50 flex flex-col">
+    <!-- Minimal top bar -->
+    <div class="bg-white border-b border-line">
+      <div class="container mx-auto max-w-7xl px-5">
+        <div class="h-16 flex items-center justify-between">
+          <%= link_to root_path, class: "flex items-center gap-2 font-display font-bold text-xl text-terra-700" do %>
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-terra-500 text-white text-lg font-bold">S</span>
+            <span>semite<span class="text-terra-500">buyer</span></span>
+          <% end %>
+          <%= link_to "На главную", root_path, class: "sb-btn--ghost sb-btn--sm" %>
+        </div>
+      </div>
+    </div>
+
+    <% flash.each do |type, message| %>
+      <% alert_class = case type.to_s
+        when "notice" then "sb-alert--success"
+        when "alert"  then "sb-alert--warning"
+        when "error", "danger" then "sb-alert--danger"
+        else "sb-alert--info"
+        end %>
+      <div class="container mx-auto max-w-2xl mt-6 px-5" data-turbo-cache="false">
+        <div class="<%= alert_class %>" role="alert">
+          <span class="mt-0.5 shrink-0">
+            <% if type.to_s == "notice" %>&#10003;<% elsif type.to_s == "alert" %>&#9888;<% else %>&#8505;<% end %>
+          </span>
+          <div class="text-sm leading-relaxed"><%= message %></div>
+        </div>
+      </div>
+    <% end %>
+
+    <main class="flex-1 flex items-center justify-center px-5 py-12">
+      <div class="w-full max-w-md">
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>

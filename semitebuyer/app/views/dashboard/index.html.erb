@@ -1,0 +1,84 @@
+<%= content_for(:title, "Личный кабинет · semitebuyer") %>
+
+<div class="space-y-8 max-w-6xl mx-auto">
+  <header class="flex items-center justify-between flex-wrap gap-3">
+    <div>
+      <h1 class="text-2xl font-bold">Привет, <%= current_user.first_name %>!</h1>
+      <p class="text-sm text-ink-500 mt-1">
+        <% if current_user.organizer? %>
+          Вы вошли как <span class="sb-badge sb-badge--terra">организатор</span>
+        <% else %>
+          Вы вошли как <span class="sb-badge sb-badge--neutral">участник</span>
+        <% end %>
+      </p>
+    </div>
+    <%= link_to "Создать закупку", "#", class: "sb-btn--primary" %>
+  </header>
+
+  <!-- Stats -->
+  <section class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <% stats = [
+      { v: "12", l: "Активные закупки", c: "text-terra-600" },
+      { v: "318", l: "Участников", c: "text-ink-900" },
+      { v: "47 200 ₽", l: "Собрано", c: "text-success-500" },
+      { v: "−32%", l: "Средняя скидка", c: "text-ink-900" }
+    ] %>
+    <% stats.each do |s| %>
+      <div class="sb-card sb-card--pad">
+        <div class="text-2xl font-bold <%= s[:c] %>"><%= s[:v] %></div>
+        <div class="text-sm text-ink-500 mt-1"><%= s[:l] %></div>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- Profile summary + actions -->
+  <section class="grid md:grid-cols-3 gap-4">
+    <div class="sb-card sb-card--pad md:col-span-2">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-bold">Профиль</h2>
+        <%= link_to "Редактировать", edit_user_registration_path, class: "sb-btn--ghost sb-btn--sm" %>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm">
+        <div>
+          <div class="text-ink-500 mb-1">Имя и фамилия</div>
+          <div class="font-medium"><%= current_user.display_name %></div>
+        </div>
+        <div>
+          <div class="text-ink-500 mb-1">Email</div>
+          <div class="font-medium"><%= current_user.email %></div>
+        </div>
+        <div>
+          <div class="text-ink-500 mb-1">Телефон</div>
+          <div class="font-medium"><%= current_user.phone.presence || "—" %></div>
+        </div>
+        <div>
+          <div class="text-ink-500 mb-1">Город</div>
+          <div class="font-medium"><%= current_user.city.presence || "—" %></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-card sb-card--pad">
+      <h2 class="text-lg font-bold mb-4">Статус аккаунта</h2>
+      <div class="space-y-3 text-sm">
+        <% if current_user.confirmed? %>
+          <div class="flex items-center gap-2 text-success-500">
+            <span class="sb-badge sb-badge--success">✓</span>
+            Email подтверждён
+          </div>
+        <% else %>
+          <div class="flex items-center gap-2 text-warning-500">
+            <span class="sb-badge sb-badge--warning">!</span>
+            Подтвердите email
+          </div>
+        <% end %>
+        <div class="flex items-center gap-2 text-ink-700">
+          <span class="sb-badge sb-badge--neutral">i</span>
+          Роль: <%= current_user.organizer? ? "организатор" : "участник" %>
+        </div>
+        <%= link_to "Выйти", destroy_user_session_path, method: :delete,
+            class: "sb-btn--danger sb-btn--sm w-full mt-3" %>
+      </div>
+    </div>
+  </section>
+</div>

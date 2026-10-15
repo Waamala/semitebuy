@@ -1,0 +1,123 @@
+ru:
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%d %B %Y"
+    month_names: [января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря]
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      short: "%d.%m %H:%M"
+
+  activerecord:
+    models:
+      user: "Пользователь"
+    attributes:
+      user:
+        email: "Email"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        current_password: "Текущий пароль"
+        first_name: "Имя"
+        last_name: "Фамилия"
+        phone: "Телефон"
+        city: "Город"
+        about: "О себе"
+        role: "Роль"
+        role_choice: "Кем стать"
+        remember_me: "Запомнить меня"
+    errors:
+      messages:
+        blank: "не может быть пустым"
+        taken: "уже занят"
+        too_short: "слишком короткий (минимум %{count} символов)"
+        confirmation: "не совпадает с подтверждением"
+        invalid: "имеет неверный формат"
+
+  errors:
+    format: "%{message}"
+    messages:
+      blank: "не может быть пустым"
+      taken: "уже занят"
+      too_short: "слишком короткий (минимум %{count} символов)"
+
+  helpers:
+    label:
+      user:
+        email: "Email"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        current_password: "Текущий пароль"
+        first_name: "Имя"
+        last_name: "Фамилия"
+        phone: "Телефон"
+        city: "Город"
+        about: "О себе"
+        remember_me: "Запомнить меня"
+    submit:
+      create: "Создать"
+      update: "Сохранить"
+      save: "Сохранить"
+
+  devise:
+    confirmations:
+      confirmed: "Ваш email подтверждён. Вы вошли в систему."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями."
+      send_paranoid_instructions: "Если ваш email есть в базе, вы получите письмо с инструкциями."
+    failure:
+      already_authenticated: "Вы уже вошли в систему."
+      inactive: "Ваш аккаунт ещё не активирован."
+      invalid: "Неверный email или пароль."
+      locked: "Ваш аккаунт заблокирован."
+      last_attempt: "У вас осталась последняя попытка перед блокировкой."
+      not_found_in_database: "Неверный email или пароль."
+      timeout: "Время вашей сессии истекло. Войдите снова."
+      unauthenticated: "Войдите или зарегистрируйтесь, чтобы продолжить."
+      unconfirmed: "Подтвердите ваш email, чтобы продолжить."
+    mailer:
+      confirmation_instructions:
+        subject: "Подтверждение email"
+      reset_password_instructions:
+        subject: "Восстановление пароля"
+      email_changed:
+        subject: "Email изменён"
+      password_change:
+        subject: "Пароль изменён"
+    omniauth_callbacks:
+      failure: "Не удалось авторизоваться через %{kind}: \"%{reason}\"."
+      success: "Авторизация через %{kind} выполнена."
+    passwords:
+      no_token: "Эта страница доступна только по ссылке из письма."
+      send_instructions: "В течение нескольких минут вы получите письмо с инструкциями."
+      send_paranoid_instructions: "Если ваш email есть в базе, вы получите ссылку для восстановления."
+      updated: "Пароль изменён. Вы вошли в систему."
+      updated_not_active: "Пароль изменён."
+    registrations:
+      destroyed: "Аккаунт удалён. До свидания!"
+      signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
+      signed_up_but_inactive: "Вы зарегистрированы, но аккаунт ещё не активирован."
+      signed_up_but_locked: "Вы зарегистрированы, но аккаунт заблокирован."
+      signed_up_but_unconfirmed: "Мы отправили письмо с ссылкой для подтверждения email."
+      update_needs_confirmation: "Аккаунт обновлён. Подтвердите новый email."
+      updated: "Аккаунт обновлён."
+      updated_but_not_signed_in: "Аккаунт обновлён, но нужно войти заново — пароль изменился."
+    sessions:
+      signed_in: "Вы вошли в систему."
+      signed_out: "Вы вышли из системы."
+      already_signed_out: "Вы уже вышли."
+    unlocks:
+      send_instructions: "Вы получите письмо с инструкциями по разблокировке."
+      send_paranoid_instructions: "Если ваш email есть в базе, вы получите письмо."
+      unlocked: "Аккаунт разблокирован. Войдите, чтобы продолжить."
+  errors:
+    messages:
+      already_confirmed: "уже подтверждён. Войдите в систему."
+      confirmation_period_expired: "срок подтверждения истёк (%{period}). Запросите новое письмо."
+      expired: "срок истёк. Запросите заново."
+      not_found: "не найден"
+      not_locked: "не заблокирован"
+      not_saved:
+        one: "Ошибка: %{resource} не сохранён"
+        few: "Ошибки (%{count}): %{resource} не сохранён"
+        many: "Ошибки (%{count}): %{resource} не сохранён"
+        other: "Ошибки (%{count}): %{resource} не сохранён"

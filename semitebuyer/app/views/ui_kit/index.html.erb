@@ -1,0 +1,302 @@
+<%= content_for(:title, "UI Kit — semitebuyer") %>
+
+<div class="space-y-12 max-w-6xl mx-auto">
+
+  <header class="space-y-2">
+    <div class="flex items-center gap-2">
+      <span class="sb-badge sb-badge--terra">styleguide</span>
+      <span class="sb-badge sb-badge--neutral">v0.1</span>
+    </div>
+    <h1 class="text-3xl font-bold">UI Kit — semitebuyer</h1>
+    <p class="text-ink-500 max-w-2xl">
+      Дизайн-система платформы совместных закупок. Тёплый маркетплейс-стиль:
+      терракота + кремовый. Все компоненты построены на Tailwind 4 через
+      кастомные <code class="sb-badge sb-badge--neutral">@utility</code>.
+    </p>
+  </header>
+
+  <!-- ============ Colors ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Палитра</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+      <% palette = [
+        ["cream-50", "bg-cream-50", "#FFFBF5"],
+        ["cream-100", "bg-cream-100", "#FEF6E9"],
+        ["cream-200", "bg-cream-200", "#FAE9CB"],
+        ["terra-50", "bg-terra-50", "#FBF3EE"],
+        ["terra-100", "bg-terra-100", "#F4DDCB"],
+        ["terra-200", "bg-terra-200", "#E8B98B"],
+        ["terra-300", "bg-terra-300", "#DA9670"],
+        ["terra-400", "bg-terra-400", "#C77B4F"],
+        ["terra-500", "bg-terra-500", "#B45309"],
+        ["terra-600", "bg-terra-600", "#92400E"],
+        ["terra-700", "bg-terra-700", "#7A330A"],
+        ["ink-900", "bg-ink-900", "#1F1B16"]
+      ] %>
+      <% palette.each do |name, klass, hex| %>
+        <div class="sb-card sb-card--pad !p-0 overflow-hidden">
+          <div class="<%= klass %> h-16 flex items-end p-2">
+            <span class="text-xs text-ink-700/70 bg-white/60 rounded px-1.5 py-0.5"><%= hex %></span>
+          </div>
+          <div class="px-3 py-2 text-xs font-medium text-ink-700"><%= name %></div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- ============ Buttons ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Кнопки</h2>
+    <div class="sb-card sb-card--pad space-y-5">
+      <div>
+        <div class="sb-label">Варианты</div>
+        <div class="flex flex-wrap gap-3 items-center">
+          <%= button_tag "Primary", class: "sb-btn--primary sb-btn--sm" %>
+          <%= button_tag "Primary", class: "sb-btn--primary" %>
+          <%= button_tag "Primary", class: "sb-btn--primary sb-btn--lg" %>
+          <%= button_tag "Secondary", class: "sb-btn--secondary" %>
+          <%= button_tag "Ghost", class: "sb-btn--ghost" %>
+          <%= button_tag "Danger", class: "sb-btn--danger" %>
+          <%= button_tag "Disabled", class: "sb-btn--primary", disabled: true %>
+        </div>
+      </div>
+      <div>
+        <div class="sb-label">С иконкой</div>
+        <div class="flex flex-wrap gap-3">
+          <button class="sb-btn--primary">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m-7-7h14"/></svg>
+            Создать закупку
+          </button>
+          <button class="sb-btn--secondary">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Загрузить фото
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Badges ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Бейджи</h2>
+    <div class="sb-card sb-card--pad flex flex-wrap gap-2">
+      <span class="sb-badge sb-badge--neutral">черновик</span>
+      <span class="sb-badge sb-badge--terra">активна</span>
+      <span class="sb-badge sb-badge--success">завершена</span>
+      <span class="sb-badge sb-badge--warning">почти готова</span>
+      <span class="sb-badge sb-badge--danger">отменена</span>
+      <span class="sb-badge sb-badge--info">инфо</span>
+    </div>
+  </section>
+
+  <!-- ============ Alerts ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Алерты</h2>
+    <div class="space-y-3">
+      <div class="sb-alert sb-alert--info">
+        <span class="mt-0.5 shrink-0">&#8505;</span>
+        <div class="text-sm"><strong>Информация.</strong> Закупка открыта для участников. Минимум 5 человек.</div>
+      </div>
+      <div class="sb-alert sb-alert--success">
+        <span class="mt-0.5 shrink-0">&#10003;</span>
+        <div class="text-sm"><strong>Успешно!</strong> Вы присоединились к закупке. Ожидайте сбора участников.</div>
+      </div>
+      <div class="sb-alert sb-alert--warning">
+        <span class="mt-0.5 shrink-0">&#9888;</span>
+        <div class="text-sm"><strong>Внимание!</strong> Закупка закроется через 2 часа. Успейте присоединиться.</div>
+      </div>
+      <div class="sb-alert sb-alert--danger">
+        <span class="mt-0.5 shrink-0">&#9888;</span>
+        <div class="text-sm"><strong>Ошибка.</strong> Не удалось списать платёж. Проверьте способ оплаты.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Forms ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Формы</h2>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="sb-card sb-card--pad space-y-4">
+        <div>
+          <label class="sb-label">Email</label>
+          <input type="email" class="sb-input" placeholder="you@example.com">
+          <p class="sb-hint">Используется для отправки уведомлений о закупках</p>
+        </div>
+        <div>
+          <label class="sb-label">Город</label>
+          <select class="sb-input">
+            <option>Москва</option>
+            <option>Санкт-Петербург</option>
+            <option>Новосибирск</option>
+          </select>
+        </div>
+        <div>
+          <label class="sb-label">Комментарий</label>
+          <textarea rows="3" class="sb-input" placeholder="Опишите, что хотите купить"></textarea>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="agree" class="sb-check" checked>
+          <label for="agree" class="text-sm text-ink-700">Согласен с условиями</label>
+        </div>
+      </div>
+      <div class="sb-card sb-card--pad space-y-4">
+        <div>
+          <label class="sb-label">Email (ошибка)</label>
+          <input type="email" class="sb-input sb-input--error" value="bad-email">
+          <div class="sb-error">Введите корректный email</div>
+        </div>
+        <div>
+          <label class="sb-label">Сумма закупки</label>
+          <input type="text" class="sb-input" value="15 000 ₽" disabled>
+          <p class="sb-hint">Рассчитывается автоматически</p>
+        </div>
+        <div>
+          <span class="sb-label">Способ доставки</span>
+          <div class="space-y-2">
+            <label class="flex items-center gap-2">
+              <input type="radio" name="delivery" class="sb-radio" checked>
+              <span class="text-sm text-ink-700">Самовывоз</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="radio" name="delivery" class="sb-radio">
+              <span class="text-sm text-ink-700">Курьер</span>
+            </label>
+            <label class="flex items-center gap-2">
+              <input type="radio" name="delivery" class="sb-radio">
+              <span class="text-sm text-ink-700">Почта России</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Cards ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Карточки</h2>
+    <div class="grid md:grid-cols-3 gap-4">
+
+      <!-- Purchase card -->
+      <div class="sb-card overflow-hidden">
+        <div class="aspect-[4/3] bg-gradient-to-br from-terra-100 to-terra-200 flex items-center justify-center">
+          <span class="text-4xl">🛒</span>
+        </div>
+        <div class="p-4 space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <h3 class="font-semibold text-ink-900 leading-tight">Эко-порошок оптом</h3>
+            <span class="sb-badge sb-badge--success">активна</span>
+          </div>
+          <p class="text-sm text-ink-500">5 кг биоразлагаемого порошка, цена за 1 кг.</p>
+          <div class="space-y-1.5">
+            <div class="flex justify-between text-xs">
+              <span class="text-ink-500">Участников</span>
+              <span class="font-medium">7 из 10</span>
+            </div>
+            <div class="sb-progress"><div class="sb-progress__bar" style="width: 70%"></div></div>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-terra-700 font-bold">−35%</span>
+            <%= link_to "Присоединиться", "#", class: "sb-btn--primary sb-btn--sm" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat card -->
+      <div class="sb-card sb-card--pad sb-card--lifted">
+        <div class="flex items-center justify-between mb-2">
+          <span class="sb-badge sb-badge--terra">организатор</span>
+          <span class="text-xs text-ink-400">за неделю</span>
+        </div>
+        <div class="text-3xl font-bold text-ink-900">23 закупки</div>
+        <div class="text-sm text-success-500 mt-1">↑ на 18% больше, чем на прошлой неделе</div>
+      </div>
+
+      <!-- Profile card -->
+      <div class="sb-card sb-card--pad">
+        <div class="flex items-center gap-3">
+          <div class="h-12 w-12 rounded-full bg-terra-500 text-white font-bold flex items-center justify-center text-lg">МК</div>
+          <div>
+            <div class="font-semibold text-ink-900">Мария К.</div>
+            <div class="text-xs text-ink-500">Москва · организатор</div>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-line text-center">
+          <div><div class="font-bold text-ink-900">42</div><div class="text-xs text-ink-500">закупок</div></div>
+          <div><div class="font-bold text-ink-900">318</div><div class="text-xs text-ink-500">участников</div></div>
+          <div><div class="font-bold text-ink-900">4.9</div><div class="text-xs text-ink-500">рейтинг</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Progress ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Прогресс сбора</h2>
+    <div class="sb-card sb-card--pad space-y-4 max-w-2xl">
+    <% [
+      { label: "Сумма закупки", val: "8 200 / 12 000 ₽", pct: 68 },
+      { label: "Участники",     val: "7 / 10",            pct: 70 },
+      { label: "До закрытия",   val: "осталось 6 часов",   pct: 92 }
+    ].each do |p| %>
+      <div>
+        <div class="flex justify-between text-sm mb-1.5">
+          <span class="font-medium text-ink-700"><%= p[:label] %></span>
+          <span class="text-ink-500"><%= p[:val] %></span>
+        </div>
+        <div class="sb-progress"><div class="sb-progress__bar" style="width: <%= p[:pct] %>%"></div></div>
+      </div>
+    <% end %>
+    </div>
+  </section>
+
+  <!-- ============ Navigation ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Навигация</h2>
+    <div class="sb-card sb-card--pad space-y-3">
+      <div class="flex gap-1">
+        <%= link_to "Каталог", "#", class: "sb-nav-link sb-nav-link--active" %>
+        <%= link_to "Мои закупки", "#", class: "sb-nav-link" %>
+        <%= link_to "Сообщения", "#", class: "sb-nav-link" %>
+        <%= link_to "Настройки", "#", class: "sb-nav-link" %>
+      </div>
+      <div class="flex items-center gap-2 text-sm text-ink-500">
+        <a href="#" class="hover:text-terra-700">Главная</a>
+        <span>/</span>
+        <a href="#" class="hover:text-terra-700">Каталог</a>
+        <span>/</span>
+        <span class="text-ink-900">Бытовая химия</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Auth Form Preview ============ -->
+  <section class="space-y-4">
+    <h2 class="text-xl font-bold border-b border-line pb-2">Превью auth-формы</h2>
+    <p class="text-ink-500 text-sm">
+      Форма входа Devise, стилизованная под UI kit. Полная версия доступна на
+      <%= link_to "странице входа", new_user_session_path, class: "text-terra-700 hover:underline font-medium" %>.
+    </p>
+    <div class="sb-auth-card sb-card--pad">
+      <div class="mb-6 text-center">
+        <h3 class="text-2xl font-bold">С возвращением!</h3>
+        <p class="text-sm text-ink-500 mt-1.5">Войдите, чтобы продолжить совместные закупки</p>
+      </div>
+      <div class="space-y-4">
+        <div>
+          <label class="sb-label">Email</label>
+          <input type="email" class="sb-input" placeholder="you@example.com">
+        </div>
+        <div>
+          <label class="sb-label">Пароль</label>
+          <input type="password" class="sb-input" placeholder="••••••••">
+        </div>
+        <label class="flex items-center gap-2 cursor-pointer select-none">
+          <input type="checkbox" class="sb-check">
+          <span class="text-sm text-ink-700">Запомнить меня</span>
+        </label>
+        <button class="sb-btn--primary sb-btn--lg w-full">Войти</button>
+      </div>
+    </div>
+  </section>
+
+</div>

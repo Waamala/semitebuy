@@ -1,0 +1,90 @@
+<%= content_for(:title, "semitebuyer — совместные закупки") %>
+
+<!-- Hero -->
+<section class="relative overflow-hidden">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-terra-50 via-cream-50 to-cream-50"></div>
+
+  <div class="grid md:grid-cols-2 gap-10 items-center py-12 md:py-20">
+    <div class="space-y-6">
+      <span class="sb-badge sb-badge--terra">Совместные закупки · новый формат</span>
+      <h1 class="text-4xl md:text-5xl font-bold text-ink-900 leading-tight">
+        Покупайте вместе — <span class="text-terra-600">платите меньше</span>
+      </h1>
+      <p class="text-lg text-ink-700 leading-relaxed max-w-md">
+        Объединяйтесь с другими участниками, заказывайте товары оптом и получайте
+        выгодные цены. Платформа сама соберёт участников, обработает платежи
+        и вернёт деньги, если закупка не состоялась.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <%= link_to "Создать закупку", new_user_registration_path, class: "sb-btn--primary sb-btn--lg" %>
+        <%= link_to "Стать участником", new_user_registration_path, class: "sb-btn--secondary sb-btn--lg" %>
+      </div>
+      <div class="flex items-center gap-6 pt-3 text-sm text-ink-500">
+        <div class="flex items-center gap-1.5">
+          <span class="sb-badge sb-badge--success">✓</span>
+          Без предоплаты
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="sb-badge sb-badge--success">✓</span>
+          Авто-рефанд
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="sb-badge sb-badge--success">✓</span>
+          Прозрачность
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat cards -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="sb-card sb-card--pad sb-card--lifted">
+        <div class="text-3xl font-bold text-terra-600">1 248</div>
+        <div class="text-sm text-ink-500 mt-1">активных закупок</div>
+      </div>
+      <div class="sb-card sb-card--pad sb-card--lifted">
+        <div class="text-3xl font-bold text-terra-600">8 932</div>
+        <div class="text-sm text-ink-500 mt-1">участников</div>
+      </div>
+      <div class="sb-card sb-card--pad">
+        <div class="text-3xl font-bold text-success-500">−37%</div>
+        <div class="text-sm text-ink-500 mt-1">средняя скидка</div>
+      </div>
+      <div class="sb-card sb-card--pad">
+        <div class="text-3xl font-bold text-ink-900">2.4M ₽</div>
+        <div class="text-sm text-ink-500 mt-1">сэкономлено</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="py-10">
+  <h2 class="text-2xl font-bold mb-6">Как это работает</h2>
+  <div class="grid md:grid-cols-3 gap-4">
+    <% steps = [
+      { n: "01", t: "Создайте или найдите закупку", d: "Организатор описывает товар и условия. Участники присоединяются." },
+      { n: "02", t: "Собираем заказ", d: "Платформа ждёт, пока наберётся минимальный объём. Сбор идёт в live-режиме." },
+      { n: "03", t: "Доставка и оплата", d: "Когда закупка состоялась — оплачиваем и получаем товар. Иначе — авто-рефанд." }
+    ] %>
+    <% steps.each do |s| %>
+      <div class="sb-card sb-card--pad">
+        <div class="text-sm font-semibold text-terra-600"><%= s[:n] %></div>
+        <div class="mt-1 text-lg font-semibold text-ink-900"><%= s[:t] %></div>
+        <p class="mt-2 text-sm text-ink-500 leading-relaxed"><%= s[:d] %></p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-10">
+  <div class="sb-card sb-card--pad sb-card--lifted bg-gradient-to-br from-terra-50 to-cream-100 border-terra-200">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <h3 class="text-xl font-bold text-ink-900">Посмотрите, как выглядит интерфейс</h3>
+        <p class="text-sm text-ink-500 mt-1">Демо-страница с UI-китом: кнопки, формы, карточки, алерты</p>
+      </div>
+      <%= link_to "Открыть UI kit", ui_kit_path, class: "sb-btn--primary sb-btn--lg" %>
+    </div>
+  </div>
+</section>

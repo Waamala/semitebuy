@@ -1,0 +1,136 @@
+<div class="sb-auth-card sb-card--pad">
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-ink-900">Создать аккаунт</h1>
+    <p class="text-sm text-ink-500 mt-1.5">Присоединяйтесь к совместным закупкам</p>
+  </div>
+
+  <%= form_with model: resource, url: registration_path(resource_name), local: true, html: { data: { turbo: false } }, class: "space-y-4" do |f| %>
+    <% if resource.errors.any? %>
+      <div class="sb-alert sb-alert--danger" role="alert">
+        <span class="mt-0.5 shrink-0">&#9888;</span>
+        <div class="text-sm">
+          <strong>Исправьте ошибки:</strong>
+          <ul class="list-disc list-inside mt-1">
+            <% resource.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <%= f.label :first_name, "Имя", class: "sb-label" %>
+        <%= f.text_field :first_name,
+              autocomplete: "given-name",
+              placeholder: "Анна",
+              class: "sb-input #{'sb-input--error' if resource.errors[:first_name].any?}" %>
+        <% if resource.errors[:first_name].any? %>
+          <div class="sb-error"><%= resource.errors[:first_name].first %></div>
+        <% end %>
+      </div>
+      <div>
+        <%= f.label :last_name, "Фамилия", class: "sb-label" %>
+        <%= f.text_field :last_name,
+              autocomplete: "family-name",
+              placeholder: "Иванова",
+              class: "sb-input #{'sb-input--error' if resource.errors[:last_name].any?}" %>
+        <% if resource.errors[:last_name].any? %>
+          <div class="sb-error"><%= resource.errors[:last_name].first %></div>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :email, "Email", class: "sb-label" %>
+      <%= f.email_field :email,
+            autocomplete: "email",
+            placeholder: "you@example.com",
+            class: "sb-input #{'sb-input--error' if resource.errors[:email].any?}" %>
+      <% if resource.errors[:email].any? %>
+        <div class="sb-error"><%= resource.errors[:email].first %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :phone, "Телефон (необязательно)", class: "sb-label" %>
+      <%= f.telephone_field :phone,
+            autocomplete: "tel",
+            placeholder: "+7 (900) 123-45-67",
+            class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :city, "Город (необязательно)", class: "sb-label" %>
+      <%= f.text_field :city,
+            autocomplete: "address-level2",
+            placeholder: "Москва",
+            class: "sb-input" %>
+    </div>
+
+    <div>
+      <span class="sb-label">Я хочу</span>
+      <div class="grid grid-cols-2 gap-3">
+        <label class="cursor-pointer">
+          <%= f.radio_button :role_choice, "buyer",
+                class: "sr-only peer",
+                checked: (resource.role_choice.blank? || resource.role_choice == "buyer") %>
+          <div class="sb-card sb-card--pad !shadow-none peer-checked:border-terra-500 peer-checked:bg-terra-50 transition-all hover:border-terra-300">
+            <div class="text-sm font-semibold text-ink-900">Участвовать в закупках</div>
+            <div class="text-xs text-ink-500 mt-0.5">Найти и присоединиться к совместным покупкам</div>
+          </div>
+        </label>
+        <label class="cursor-pointer">
+          <%= f.radio_button :role_choice, "organizer", class: "sr-only peer" %>
+          <div class="sb-card sb-card--pad !shadow-none peer-checked:border-terra-500 peer-checked:bg-terra-50 transition-all hover:border-terra-300">
+            <div class="text-sm font-semibold text-ink-900">Организовать закупки</div>
+            <div class="text-xs text-ink-500 mt-0.5">Собирать участников и вести совместные заказы</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :password, "Пароль", class: "sb-label" %>
+      <% if @minimum_password_length %>
+        <span class="sb-hint !mb-1.5">минимум <%= @minimum_password_length %> символов</span>
+      <% end %>
+      <%= f.password_field :password,
+            autocomplete: "new-password",
+            placeholder: "••••••••",
+            class: "sb-input #{'sb-input--error' if resource.errors[:password].any?}" %>
+      <% if resource.errors[:password].any? %>
+        <div class="sb-error"><%= resource.errors[:password].first %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Повторите пароль", class: "sb-label" %>
+      <%= f.password_field :password_confirmation,
+            autocomplete: "new-password",
+            placeholder: "••••••••",
+            class: "sb-input #{'sb-input--error' if resource.errors[:password_confirmation].any?}" %>
+      <% if resource.errors[:password_confirmation].any? %>
+        <div class="sb-error"><%= resource.errors[:password_confirmation].first %></div>
+      <% end %>
+    </div>
+
+    <label class="flex items-start gap-2 text-sm text-ink-700 cursor-pointer select-none">
+      <%= check_box_tag :agreement, "1", false, class: "sb-check mt-1", required: true %>
+      <span>
+        Я принимаю
+        <a href="#" class="text-terra-700 hover:underline">условия использования</a>
+        и
+        <a href="#" class="text-terra-700 hover:underline">политику конфиденциальности</a>
+      </span>
+    </label>
+
+    <%= f.submit "Зарегистрироваться", class: "sb-btn--primary sb-btn--lg w-full" %>
+  <% end %>
+
+  <div class="mt-6 pt-5 border-t border-line text-center text-sm text-ink-500">
+    Уже есть аккаунт?
+    <%= link_to "Войти", new_user_session_path, class: "font-semibold text-terra-700 hover:underline" %>
+  </div>
+</div>

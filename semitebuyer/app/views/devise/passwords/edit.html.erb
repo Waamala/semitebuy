@@ -1,0 +1,25 @@
+<div class="sb-auth-card sb-card--pad">
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-ink-900">Новый пароль</h1>
+    <p class="text-sm text-ink-500 mt-1.5">Придумайте новый пароль для вашего аккаунта</p>
+  </div>
+
+  <%= form_with model: resource, url: password_path(resource_name), local: true, method: :put, html: { data: { turbo: false } }, class: "space-y-4" do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div>
+      <%= f.label :password, "Новый пароль", class: "sb-label" %>
+      <% if @minimum_password_length %>
+        <span class="sb-hint !mb-1.5">минимум <%= @minimum_password_length %> символов</span>
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "sb-input" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Повторите новый пароль", class: "sb-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "sb-input" %>
+    </div>
+
+    <%= f.submit "Сменить пароль", class: "sb-btn--primary sb-btn--lg w-full" %>
+  <% end %>
+</div>

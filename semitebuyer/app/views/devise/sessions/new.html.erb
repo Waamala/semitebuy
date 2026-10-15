@@ -1,0 +1,52 @@
+<div class="sb-auth-card sb-card--pad">
+  <div class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-ink-900">С возвращением!</h1>
+    <p class="text-sm text-ink-500 mt-1.5">Войдите, чтобы продолжить совместные закупки</p>
+  </div>
+
+  <%= form_with model: resource, url: session_path(resource_name), local: true, html: { data: { turbo: false } }, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email, "Email", class: "sb-label" %>
+      <%= f.email_field :email,
+            autofocus: true,
+            autocomplete: "email",
+            placeholder: "you@example.com",
+            class: "sb-input",
+            value: params.dig(:user, :email) %>
+    </div>
+
+    <div>
+      <div class="flex items-center justify-between mb-1.5">
+        <%= f.label :password, "Пароль", class: "sb-label !mb-0" %>
+        <% if devise_mapping.recoverable? && controller_name != "passwords" %>
+          <%= link_to "Забыли пароль?", new_user_password_path, class: "text-xs font-medium text-terra-700 hover:underline" %>
+        <% end %>
+      </div>
+      <%= f.password_field :password,
+            autocomplete: "current-password",
+            placeholder: "••••••••",
+            class: "sb-input" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <label class="flex items-center gap-2 cursor-pointer select-none">
+        <%= f.check_box :remember_me, class: "sb-check" %>
+        <span class="text-sm text-ink-700">Запомнить меня на этом устройстве</span>
+      </label>
+    <% end %>
+
+    <%= f.submit "Войти", class: "sb-btn--primary sb-btn--lg w-full" %>
+  <% end %>
+
+  <div class="mt-6 pt-5 border-t border-line text-center text-sm text-ink-500">
+    Нет аккаунта?
+    <%= link_to "Зарегистрироваться", new_user_registration_path, class: "font-semibold text-terra-700 hover:underline" %>
+  </div>
+</div>
+
+<% if devise_mapping.confirmable? && controller_name != "confirmations" %>
+  <p class="mt-4 text-center text-xs text-ink-400">
+    Не пришло письмо подтверждения?
+    <%= link_to "Запросить повторно", new_user_confirmation_path, class: "text-terra-700 hover:underline" %>
+  </p>
+<% end %>
